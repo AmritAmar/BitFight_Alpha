@@ -1,0 +1,1964 @@
+VERSION 5.00
+Begin VB.Form frmMainMenu 
+   BackColor       =   &H00000000&
+   BorderStyle     =   1  'Fixed Single
+   Caption         =   "The Game - Main Menu"
+   ClientHeight    =   6600
+   ClientLeft      =   45
+   ClientTop       =   375
+   ClientWidth     =   5895
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   6600
+   ScaleWidth      =   5895
+   StartUpPosition =   3  'Windows Default
+   Begin VB.Frame frameMainMenu 
+      BackColor       =   &H000080FF&
+      Caption         =   "Main Menu"
+      BeginProperty Font 
+         Name            =   "MS Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   4455
+      Left            =   120
+      TabIndex        =   1
+      Top             =   1920
+      Width           =   5655
+      Begin VB.CommandButton cmdExit 
+         Caption         =   "Exit The Game!"
+         Height          =   855
+         Left            =   1080
+         TabIndex        =   4
+         Top             =   2760
+         Width           =   3375
+      End
+      Begin VB.CommandButton cmdInstructions 
+         Caption         =   "How to Play?"
+         Height          =   855
+         Left            =   1080
+         TabIndex        =   3
+         Top             =   1800
+         Width           =   3375
+      End
+      Begin VB.CommandButton cmdPlay 
+         Caption         =   "Play The Game!"
+         Height          =   855
+         Left            =   1080
+         TabIndex        =   2
+         Top             =   840
+         Width           =   3375
+      End
+   End
+   Begin VB.Label lblTheGame 
+      Alignment       =   2  'Center
+      BackColor       =   &H000080FF&
+      Caption         =   "The Game"
+      BeginProperty Font 
+         Name            =   "Script MT Bold"
+         Size            =   48
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   1575
+      Left            =   120
+      TabIndex        =   0
+      Top             =   120
+      Width           =   5655
+   End
+End
+Attribute VB_Name = "frmMainMenu"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Private Sub cmdExit_Click()
+'Exit is Clicked, then the Program terminates!
+    End
+
+End Sub
+
+Private Sub cmdInstructions_Click()
+'Show Insturctions Form
+    frmGameInfo.Show
+    Unload Me
+
+End Sub
+
+Private Sub cmdPlay_Click()
+'Show the Game Options Form
+    frmGameStart.Show
+    Unload Me
+
+End Sub
+---------------------------------------------------------------------------------
+VERSION 5.00
+Begin VB.Form frmGameInfo 
+   BackColor       =   &H00000000&
+   BorderStyle     =   1  'Fixed Single
+   Caption         =   "The Game - Instructions"
+   ClientHeight    =   9030
+   ClientLeft      =   45
+   ClientTop       =   375
+   ClientWidth     =   5895
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   9030
+   ScaleWidth      =   5895
+   StartUpPosition =   3  'Windows Default
+   Begin VB.TextBox txtUSpeed 
+      Enabled         =   0   'False
+      Height          =   495
+      Left            =   1200
+      TabIndex        =   9
+      Top             =   6120
+      Width           =   975
+   End
+   Begin VB.TextBox txtDSpeed 
+      Enabled         =   0   'False
+      Height          =   495
+      Left            =   1200
+      TabIndex        =   8
+      Top             =   6720
+      Width           =   975
+   End
+   Begin VB.TextBox txtLSpeed 
+      Enabled         =   0   'False
+      Height          =   495
+      Left            =   120
+      TabIndex        =   7
+      Top             =   6720
+      Width           =   975
+   End
+   Begin VB.TextBox txtRSpeed 
+      Enabled         =   0   'False
+      Height          =   495
+      Left            =   2280
+      TabIndex        =   6
+      Top             =   6720
+      Width           =   975
+   End
+   Begin VB.Timer timEngine 
+      Interval        =   5
+      Left            =   5040
+      Top             =   2160
+   End
+   Begin VB.Label Label1 
+      BackColor       =   &H00FF00FF&
+      Caption         =   "Your Speed Status. If you go over 150 then you Die!"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   1095
+      Left            =   3360
+      TabIndex        =   10
+      Top             =   6120
+      Width           =   2415
+   End
+   Begin VB.Label lblPlay 
+      Alignment       =   2  'Center
+      BackColor       =   &H0000C000&
+      Caption         =   "Play!"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Left            =   3480
+      TabIndex        =   5
+      Top             =   8520
+      Width           =   2295
+   End
+   Begin VB.Label lblObjective 
+      BackColor       =   &H0000FFFF&
+      Caption         =   "The Objective of the Game is to Reach 100, 200 or 500 Points without Dying, whithin the Arena! The best way to learn is to Play!"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   975
+      Left            =   120
+      TabIndex        =   4
+      Top             =   7320
+      Width           =   5655
+   End
+   Begin VB.Image Image1 
+      Height          =   255
+      Left            =   480
+      Top             =   3120
+      Width           =   135
+   End
+   Begin VB.Label blbInstruction2 
+      BackColor       =   &H00C00000&
+      Caption         =   "Avoid the Red Squares! They are Enemies! If you Hit them, you will die!"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   615
+      Left            =   1200
+      TabIndex        =   3
+      Top             =   3000
+      Width           =   4575
+   End
+   Begin VB.Label lblExit 
+      Alignment       =   2  'Center
+      BackColor       =   &H0000C000&
+      Caption         =   "Return to Main Menu!"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Left            =   120
+      TabIndex        =   2
+      Top             =   8520
+      Width           =   2415
+   End
+   Begin VB.Label lblInstruction1 
+      BackColor       =   &H000000FF&
+      Caption         =   "Use WASD or the Arrow Keys to Move your Blue Square."
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   615
+      Left            =   120
+      TabIndex        =   1
+      Top             =   1920
+      Width           =   3615
+   End
+   Begin VB.Label lblTheGame 
+      Alignment       =   2  'Center
+      BackColor       =   &H000080FF&
+      Caption         =   "The Game"
+      BeginProperty Font 
+         Name            =   "Script MT Bold"
+         Size            =   48
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   1575
+      Left            =   120
+      TabIndex        =   0
+      Top             =   120
+      Width           =   5655
+   End
+End
+Attribute VB_Name = "frmGameInfo"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit 'Define Every Variable Option
+
+Dim X As Integer 'User's Square X Co-ordinates
+Dim Y As Integer 'User's Square Y Co-ordinates
+
+Dim xspeed As Integer 'User's Square X Speed
+Dim yspeed As Integer 'User's Square Y Speed
+
+Dim a As Integer 'Enemy Square X Co-ordinates
+Dim b As Integer 'Enemy Square Y Co-ordinates
+
+
+Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+'This is the Code to Set the Speed of the User's Square...
+'The Variables are then applied to the Coo-ordinates of the Square
+
+    If KeyCode = KeyCodeConstants.vbKeyRight Or KeyCode = KeyCodeConstants.vbKeyD Then
+    
+        xspeed = xspeed + 10
+        txtRSpeed.Text = txtRSpeed.Text + 10
+        txtLSpeed.Text = txtLSpeed.Text - 10
+        
+    ElseIf KeyCode = KeyCodeConstants.vbKeyLeft Or KeyCode = KeyCodeConstants.vbKeyA Then
+    
+        xspeed = xspeed - 10
+        txtLSpeed.Text = txtLSpeed.Text + 10
+        txtRSpeed.Text = txtRSpeed.Text - 10
+
+    ElseIf KeyCode = KeyCodeConstants.vbKeyUp Or KeyCode = KeyCodeConstants.vbKeyW Then
+    
+        yspeed = yspeed - 10
+        txtUSpeed.Text = txtUSpeed.Text + 10
+        txtDSpeed.Text = txtDSpeed.Text - 10
+        
+    ElseIf KeyCode = KeyCodeConstants.vbKeyDown Or KeyCode = KeyCodeConstants.vbKeyS Then
+    
+        yspeed = yspeed + 10
+        txtDSpeed.Text = txtDSpeed.Text + 10
+        txtUSpeed.Text = txtUSpeed.Text - 10
+       
+    End If
+
+End Sub
+
+Private Sub Form_Load()
+'The Form Start Code
+    
+    'Define Position of User's Square
+    
+    X = 4680
+    Y = 2160
+    
+    'Define Position of Enemy's Square
+    
+    a = 480
+    b = 3120
+    
+    'Set Speed
+    
+    txtDSpeed.Text = 0
+    txtLSpeed.Text = 0
+    txtRSpeed.Text = 0
+    txtUSpeed.Text = 0
+    
+End Sub
+
+Private Sub Form_Paint()
+'Draw the User's Square!
+
+    Line (X, Y)-(X + 300, Y + 300), RGB(0, 0, 255), BF
+    
+'Draw the Enemy Square!
+
+    Line (a, b)-(a + 300, b + 300), RGB(255, 0, 0), BF
+
+End Sub
+
+Private Sub lblExit_Click()
+'When Exit is Clicked!
+    timEngine.Enabled = False
+    Unload Me
+    frmMainMenu.Show
+
+End Sub
+
+Private Sub lblPlay_Click()
+'When Play is Clicked!
+    timEngine.Enabled = False
+    Unload Me
+    frmGameStart.Show
+    
+End Sub
+
+Private Sub timEngine_Timer()
+'Error Handler
+
+    On Error GoTo erroroverflow
+    
+'This is where the Square actually moves!
+'The timer refreshes the Form every 1 millisecond to Redraw the Position of the Squares!
+
+    X = X + xspeed
+    Y = Y + yspeed
+    
+    If txtUSpeed.Text > 150 Or txtDSpeed.Text > 150 Or txtLSpeed.Text > 150 Or txtRSpeed.Text > 150 Then
+    
+        MsgBox ("Your Engine Burnt out!")
+        X = 4680
+        Y = 2160
+        
+        xspeed = 0
+        yspeed = 0
+        
+        txtDSpeed.Text = 0
+        txtLSpeed.Text = 0
+        txtRSpeed.Text = 0
+        txtUSpeed.Text = 0
+        
+    End If
+    
+'Collisons... This code detects when the User's Square collides with the Enemy Square!
+
+    If Abs(a - X) < 300 And Abs(b - Y) < 300 Then
+    
+        MsgBox ("You just died!")
+        
+        X = 4680
+        Y = 2160
+        
+        xspeed = 0
+        yspeed = 0
+        
+        txtDSpeed.Text = 0
+        txtLSpeed.Text = 0
+        txtRSpeed.Text = 0
+        txtUSpeed.Text = 0
+    End If
+    
+    Me.Refresh
+    
+Exit Sub
+
+erroroverflow:
+
+    MsgBox ("If you Escape the Box and Go too far, then you will be automatically reset!")
+    X = 4680
+    Y = 2160
+        
+    xspeed = 0
+    yspeed = 0
+
+End Sub
+--------------------------------------------------------------------------------------------------------------
+VERSION 5.00
+Begin VB.Form frmGameStart 
+   BackColor       =   &H00000000&
+   BorderStyle     =   1  'Fixed Single
+   Caption         =   "The Game - Game Options"
+   ClientHeight    =   5895
+   ClientLeft      =   45
+   ClientTop       =   375
+   ClientWidth     =   5925
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   5895
+   ScaleWidth      =   5925
+   StartUpPosition =   3  'Windows Default
+   Begin VB.Frame frameGameOptions 
+      BackColor       =   &H000080FF&
+      Caption         =   "Game Options"
+      BeginProperty Font 
+         Name            =   "MS Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   3855
+      Left            =   120
+      TabIndex        =   0
+      Top             =   1920
+      Width           =   5655
+      Begin VB.OptionButton opoHard 
+         BackColor       =   &H000080FF&
+         Caption         =   "Hard!"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Left            =   3960
+         TabIndex        =   7
+         Top             =   840
+         Width           =   1335
+      End
+      Begin VB.OptionButton opoMedium 
+         BackColor       =   &H000080FF&
+         Caption         =   "Medium!"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Left            =   2040
+         TabIndex        =   6
+         Top             =   840
+         Width           =   1575
+      End
+      Begin VB.OptionButton opoEasy 
+         BackColor       =   &H000080FF&
+         Caption         =   "Easy!"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Left            =   240
+         TabIndex        =   5
+         Top             =   840
+         Width           =   1575
+      End
+      Begin VB.CommandButton cmdReturn 
+         Caption         =   "Return to Main Menu!"
+         Height          =   615
+         Left            =   240
+         TabIndex        =   3
+         Top             =   3000
+         Width           =   1935
+      End
+      Begin VB.CommandButton cmdStart 
+         Caption         =   "Start the Game!"
+         Height          =   615
+         Left            =   3480
+         TabIndex        =   2
+         Top             =   3000
+         Width           =   1935
+      End
+      Begin VB.Label Label1 
+         BackColor       =   &H000080FF&
+         Caption         =   "Select the Difficulty!"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   1680
+         TabIndex        =   8
+         Top             =   360
+         Width           =   2535
+      End
+      Begin VB.Label lblDifficulty 
+         BackColor       =   &H0000FFFF&
+         Caption         =   "Select Your Difficulty Above!"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   1215
+         Left            =   240
+         TabIndex        =   4
+         Top             =   1560
+         Width           =   5175
+      End
+   End
+   Begin VB.Label lblTheGame 
+      Alignment       =   2  'Center
+      BackColor       =   &H000080FF&
+      Caption         =   "The Game"
+      BeginProperty Font 
+         Name            =   "Script MT Bold"
+         Size            =   48
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   1575
+      Left            =   120
+      TabIndex        =   1
+      Top             =   120
+      Width           =   5655
+   End
+End
+Attribute VB_Name = "frmGameStart"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Private Sub cmdReturn_Click()
+'if Return is Clicked!
+    Unload Me
+    frmMainMenu.Show
+
+End Sub
+
+Private Sub cmdStart_Click()
+'Easy, Medium or Hard Form Opener after Start is Clicked!
+
+    If Me.Caption = "The Game - Game Options - Easy!" Then
+    
+        MsgBox ("Get Ready!")
+        Unload Me
+        frmEasyGame.Show
+        
+            
+    ElseIf Me.Caption = "The Game - Game Options - Medium!" Then
+    
+        MsgBox ("Get Ready!")
+        Unload Me
+        frmMediumGame.Show
+        
+        
+    ElseIf Me.Caption = "The Game - Game Options - Hard!" Then
+    
+        MsgBox ("Get Ready!")
+        Unload Me
+        frmHardGame.Show
+        
+        
+    End If
+
+End Sub
+
+
+Private Sub opoEasy_Click()
+'If Option Easy is Selected!
+
+    Me.Caption = "The Game - Game Options - Easy!"
+    lblDifficulty.Caption = "Easy! - You have only 1 opponent. The Goal is to score 100 Points. Every Enemy - Wall Collison is 4 Points! Engine Burns out if Speed is over 150!"
+
+End Sub
+
+Private Sub opoHard_Click()
+'If Option Hard is Selected!
+
+    Me.Caption = "The Game - Game Options - Hard!"
+    lblDifficulty.Caption = "Hard! - You have only 3 opponents. The Goal is to score 500 Points. Every Enemy to Wall Collison is 1 Point! Engine Burns out if Speed is over 150!"
+
+End Sub
+
+Private Sub opoMedium_Click()
+'If Option Medium is Selected!
+
+    Me.Caption = "The Game - Game Options - Medium!"
+    lblDifficulty.Caption = "Medium! - You have only 2 opponents. The Goal is to score 200 Points. Every Enemy to Wall Collison is 2 Points! Engine Burns out if Speed is over 150!"
+
+End Sub
+-------------------------------------------------------------------------------------------------------------------------
+VERSION 5.00
+Begin VB.Form frmEasyGame 
+   BackColor       =   &H00000000&
+   BorderStyle     =   1  'Fixed Single
+   Caption         =   "The Game - Easy!"
+   ClientHeight    =   7920
+   ClientLeft      =   45
+   ClientTop       =   375
+   ClientWidth     =   13845
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   7920
+   ScaleWidth      =   13845
+   StartUpPosition =   3  'Windows Default
+   Begin VB.TextBox txtRSpeed 
+      Enabled         =   0   'False
+      Height          =   495
+      Left            =   12600
+      TabIndex        =   5
+      Top             =   7200
+      Width           =   975
+   End
+   Begin VB.TextBox txtLSpeed 
+      Enabled         =   0   'False
+      Height          =   495
+      Left            =   10440
+      TabIndex        =   4
+      Top             =   7200
+      Width           =   975
+   End
+   Begin VB.TextBox txtDSpeed 
+      Enabled         =   0   'False
+      Height          =   495
+      Left            =   11520
+      TabIndex        =   3
+      Top             =   7200
+      Width           =   975
+   End
+   Begin VB.TextBox txtUSpeed 
+      Enabled         =   0   'False
+      Height          =   495
+      Left            =   11520
+      TabIndex        =   2
+      Top             =   6600
+      Width           =   975
+   End
+   Begin VB.Timer timEngine 
+      Interval        =   1
+      Left            =   120
+      Top             =   240
+   End
+   Begin VB.Label lblScore 
+      BackColor       =   &H00000000&
+      Caption         =   "0"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H000000FF&
+      Height          =   375
+      Left            =   1800
+      TabIndex        =   1
+      Top             =   6960
+      Width           =   1215
+   End
+   Begin VB.Label lblYourScore 
+      BackColor       =   &H00000000&
+      Caption         =   "Your Score:"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H000000FF&
+      Height          =   375
+      Left            =   240
+      TabIndex        =   0
+      Top             =   6960
+      Width           =   1455
+   End
+End
+Attribute VB_Name = "frmEasyGame"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+'Declarations!
+
+Option Explicit 'Define Every Variable
+
+Dim X As Integer 'User's Square X co-ordinates
+Dim Y As Integer 'User's Square Y co-ordinates
+
+Dim a As Integer 'Enemy's Square X co-ordinates
+Dim b As Integer 'Enemy's Square Y co-ordinates
+
+Dim w(1 To 8) As Integer 'The Walls that enclose the Squares (Array!)
+
+Dim xspeed As Integer 'User's Square X Speed
+Dim yspeed As Integer 'User's Square Y Speed
+Dim aspeed As Integer 'Enemy's Square X Speed
+Dim bspeed As Integer 'Enemy's Square Y Speed
+
+Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+'This is the Code to Set the Speed of the User's Square...
+'The Variables are then applied to the Coo-ordinates of the Square
+
+    If KeyCode = KeyCodeConstants.vbKeyRight Or KeyCode = KeyCodeConstants.vbKeyD Then
+    
+        xspeed = xspeed + 10
+        txtRSpeed.Text = txtRSpeed.Text + 10
+        txtLSpeed.Text = txtLSpeed.Text - 10
+        
+    ElseIf KeyCode = KeyCodeConstants.vbKeyLeft Or KeyCode = KeyCodeConstants.vbKeyA Then
+    
+        xspeed = xspeed - 10
+        txtLSpeed.Text = txtLSpeed.Text + 10
+        txtRSpeed.Text = txtRSpeed.Text - 10
+
+    ElseIf KeyCode = KeyCodeConstants.vbKeyUp Or KeyCode = KeyCodeConstants.vbKeyW Then
+    
+        yspeed = yspeed - 10
+        txtUSpeed.Text = txtUSpeed.Text + 10
+        txtDSpeed.Text = txtDSpeed.Text - 10
+        
+    ElseIf KeyCode = KeyCodeConstants.vbKeyDown Or KeyCode = KeyCodeConstants.vbKeyS Then
+    
+        yspeed = yspeed + 10
+        txtDSpeed.Text = txtDSpeed.Text + 10
+        txtUSpeed.Text = txtUSpeed.Text - 10
+       
+    End If
+        
+End Sub
+
+Private Sub Form_Load()
+'The Form Start Code
+
+    'Define Enemy Square Speed
+    
+    aspeed = CInt(Int((-50 - -75 + 1) * Rnd() + -75))
+    bspeed = CInt(Int((-50 - -75 + 1) * Rnd() + -75))
+    
+    'Define Position of User's Square
+    
+    X = 2500
+    Y = 2900
+    
+    'Safety Precautions
+    
+    xspeed = 0
+    yspeed = 0
+  
+    'Wall Co-ordinates
+    
+    w(1) = 250
+    w(2) = 250
+    w(3) = 250
+    w(4) = 6240
+    w(5) = 250
+    w(6) = 250
+    w(7) = 13550
+    w(8) = 250
+    
+    'Enemy Square Position
+    
+    a = 11500
+    b = 2900
+    
+    'Enable the Timer
+    
+    timEngine.Enabled = True
+    
+    'Set Speed
+    
+    txtDSpeed.Text = 0
+    txtLSpeed.Text = 0
+    txtRSpeed.Text = 0
+    txtUSpeed.Text = 0
+    
+End Sub
+Private Sub Form_Paint()
+
+    'Draws the User's Square for use in the Engine
+    
+    Line (X, Y)-(X + 300, Y + 300), RGB(0, 0, 150), BF
+    
+    'Draws the Enemy Square for use in the Engine
+    
+    Line (a, b)-(a + 300, b + 300), RGB(255, 0, 0), BF
+    
+    'Draws the Walls for use in the Engine
+    
+    Line (w(1), w(2))-(w(1) + 13320, w(2) + 15), RGB(0, 255, 0), BF
+    Line (w(3), w(4))-(w(3) + 13320, w(4) + 15), RGB(0, 255, 0), BF
+    Line (w(5), w(6))-(w(5) + 15, w(6) + 5990), RGB(0, 255, 0), BF
+    Line (w(7), w(8))-(w(7) + 15, w(8) + 5990), RGB(0, 255, 0), BF
+    
+End Sub
+
+Private Sub timEngine_Timer()
+'Error Handler!
+    
+    On Error GoTo errhandle
+    
+    'Setting the User's Square Able to move!
+    
+    X = X + xspeed
+    Y = Y + yspeed
+    
+    'Setting the Enemy's Square to move!
+    
+    a = a + aspeed
+    b = b + bspeed
+    
+    'The Full Collison System!
+    
+     If Abs(w(1) - X) < 13335 And Abs(w(2) - Y) < 50 Then
+    
+        yspeed = yspeed * -1
+        txtUSpeed.Text = txtUSpeed.Text * -1
+        txtDSpeed.Text = txtDSpeed.Text * -1
+    
+    End If
+    
+    If Abs(w(1) - a) < 13335 And Abs(w(2) - b) < 50 Then
+    
+        bspeed = (bspeed * -1)
+        lblScore.Caption = lblScore.Caption + 4
+        
+    End If
+    
+    If Abs(w(3) - X) < 13335 And Abs(w(4) - Y) < 270 Then
+    
+        yspeed = yspeed * -1
+        txtUSpeed.Text = txtUSpeed.Text * -1
+        txtDSpeed.Text = txtDSpeed.Text * -1
+        
+    End If
+    
+    If Abs(w(3) - a) < 13335 And Abs(w(4) - b) < 270 Then
+    
+        bspeed = (bspeed * -1)
+        lblScore.Caption = lblScore.Caption + 4
+        
+    End If
+    
+    If Abs(w(5) - X) < 60 And Abs(w(6) - Y) < 5990 Then
+    
+        xspeed = xspeed * -1
+        txtLSpeed.Text = txtLSpeed.Text * -1
+        txtRSpeed.Text = txtRSpeed.Text * -1
+    End If
+    
+    If Abs(w(5) - a) < 60 And Abs(w(6) - b) < 5990 Then
+    
+        aspeed = (aspeed * -1)
+        lblScore.Caption = lblScore.Caption + 4
+        
+    End If
+    
+        If Abs(w(7) - X) < 270 And Abs(w(8) - Y) < 5990 Then
+    
+        xspeed = xspeed * -1
+        txtLSpeed.Text = txtLSpeed.Text * -1
+        txtRSpeed.Text = txtRSpeed.Text * -1
+    
+    End If
+    
+    If Abs(w(7) - a) < 270 And Abs(w(8) - b) < 5990 Then
+    
+        aspeed = (aspeed * -1)
+        lblScore.Caption = lblScore.Caption + 4
+                
+    End If
+    
+    If lblScore.Caption >= 100 Then
+    
+        MsgBox ("Congratulations! You have Won! The Program will now close!")
+        End
+                
+    End If
+    
+        'Speed Limits!
+    
+    If txtUSpeed.Text > 150 Or txtDSpeed.Text > 150 Or txtLSpeed.Text > 150 Or txtRSpeed.Text > 150 Then
+    
+        MsgBox ("Your Engine Burnt out! Resetting Arena...")
+        X = 2500
+        Y = 2900
+
+        xspeed = 0
+        yspeed = 0
+        
+        a = 11500
+        b = 2900
+    
+        txtDSpeed.Text = 0
+        txtLSpeed.Text = 0
+        txtRSpeed.Text = 0
+        txtUSpeed.Text = 0
+        
+        lblScore.Caption = 0
+        
+        
+    End If
+    
+    If Abs(a - X) < 300 And Abs(b - Y) < 300 Then
+    
+        MsgBox ("You Died! Resetting Arena...")
+        X = 2500
+        Y = 2900
+
+        xspeed = 0
+        yspeed = 0
+        
+        a = 11500
+        b = 2900
+    
+        txtDSpeed.Text = 0
+        txtLSpeed.Text = 0
+        txtRSpeed.Text = 0
+        txtUSpeed.Text = 0
+        
+        lblScore.Caption = 0
+                
+    End If
+    
+    Me.Refresh
+    
+Exit Sub
+
+errhandle:
+
+'Resets the Square and Square Speed (User)
+
+    MsgBox ("Resetting Your Square!")
+    
+    X = 2500
+    Y = 2900
+    
+    xspeed = 0
+    yspeed = 0
+    
+    txtDSpeed.Text = 0
+    txtLSpeed.Text = 0
+    txtRSpeed.Text = 0
+    txtUSpeed.Text = 0
+
+End Sub
+-----------------------------------------------------------------------------------------------------------------------------
+VERSION 5.00
+Begin VB.Form frmMediumGame 
+   BackColor       =   &H00000000&
+   BorderStyle     =   1  'Fixed Single
+   Caption         =   "The Game - Medium!"
+   ClientHeight    =   7965
+   ClientLeft      =   45
+   ClientTop       =   375
+   ClientWidth     =   14280
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   7965
+   ScaleWidth      =   14280
+   StartUpPosition =   3  'Windows Default
+   Begin VB.Timer timEngine 
+      Interval        =   1
+      Left            =   120
+      Top             =   240
+   End
+   Begin VB.TextBox txtUSpeed 
+      Enabled         =   0   'False
+      Height          =   495
+      Left            =   11520
+      TabIndex        =   3
+      Top             =   6600
+      Width           =   975
+   End
+   Begin VB.TextBox txtDSpeed 
+      Enabled         =   0   'False
+      Height          =   495
+      Left            =   11520
+      TabIndex        =   2
+      Top             =   7200
+      Width           =   975
+   End
+   Begin VB.TextBox txtLSpeed 
+      Enabled         =   0   'False
+      Height          =   495
+      Left            =   10440
+      TabIndex        =   1
+      Top             =   7200
+      Width           =   975
+   End
+   Begin VB.TextBox txtRSpeed 
+      Enabled         =   0   'False
+      Height          =   495
+      Left            =   12600
+      TabIndex        =   0
+      Top             =   7200
+      Width           =   975
+   End
+   Begin VB.Label lblYourScore 
+      BackColor       =   &H00000000&
+      Caption         =   "Your Score:"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H000000FF&
+      Height          =   375
+      Left            =   240
+      TabIndex        =   5
+      Top             =   6960
+      Width           =   1455
+   End
+   Begin VB.Label lblScore 
+      BackColor       =   &H00000000&
+      Caption         =   "0"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H000000FF&
+      Height          =   375
+      Left            =   1800
+      TabIndex        =   4
+      Top             =   6960
+      Width           =   1215
+   End
+End
+Attribute VB_Name = "frmMediumGame"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+'Declarations!
+
+Option Explicit 'Define Every Variable
+
+Dim X As Integer 'User's Square X co-ordinates
+Dim Y As Integer 'User's Square Y co-ordinates
+
+Dim a As Integer 'Enemy's Square X co-ordinates
+Dim b As Integer 'Enemy's Square Y co-ordinates
+Dim c As Integer 'Enemy's Square X co-ordinates
+Dim d As Integer 'Enemy's Square X co-ordinates
+
+Dim w(1 To 8) As Integer 'The Walls that enclose the Squares (Array!)
+
+Dim xspeed As Integer 'User's Square X Speed
+Dim yspeed As Integer 'User's Square Y Speed
+Dim aspeed As Integer 'Enemy's Square X Speed
+Dim bspeed As Integer 'Enemy's Square Y Speed
+Dim cspeed As Integer 'Enemy's Square X Speed
+Dim dspeed As Integer 'Enemy's Square Y Speed
+
+Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+'This is the Code to Set the Speed of the User's Square...
+'The Variables are then applied to the Coo-ordinates of the Square
+
+    If KeyCode = KeyCodeConstants.vbKeyRight Or KeyCode = KeyCodeConstants.vbKeyD Then
+    
+        xspeed = xspeed + 10
+        txtRSpeed.Text = txtRSpeed.Text + 10
+        txtLSpeed.Text = txtLSpeed.Text - 10
+        
+    ElseIf KeyCode = KeyCodeConstants.vbKeyLeft Or KeyCode = KeyCodeConstants.vbKeyA Then
+    
+        xspeed = xspeed - 10
+        txtLSpeed.Text = txtLSpeed.Text + 10
+        txtRSpeed.Text = txtRSpeed.Text - 10
+
+    ElseIf KeyCode = KeyCodeConstants.vbKeyUp Or KeyCode = KeyCodeConstants.vbKeyW Then
+    
+        yspeed = yspeed - 10
+        txtUSpeed.Text = txtUSpeed.Text + 10
+        txtDSpeed.Text = txtDSpeed.Text - 10
+        
+    ElseIf KeyCode = KeyCodeConstants.vbKeyDown Or KeyCode = KeyCodeConstants.vbKeyS Then
+    
+        yspeed = yspeed + 10
+        txtDSpeed.Text = txtDSpeed.Text + 10
+        txtUSpeed.Text = txtUSpeed.Text - 10
+       
+    End If
+        
+End Sub
+
+Private Sub Form_Load()
+'The Form Start Code
+
+    'Define Enemy Square Speed
+    
+    aspeed = CInt(Int((-50 - -75 + 1) * Rnd() + -75))
+    bspeed = CInt(Int((-50 - -75 + 1) * Rnd() + -75))
+    cspeed = CInt(Int((75 - 50 + 1) * Rnd() + 50))
+    dspeed = CInt(Int((75 - 50 + 1) * Rnd() + 50))
+    
+    'Define Position of User's Square
+    
+    X = 2500
+    Y = 2900
+    
+    'Safety Precautions
+    
+    xspeed = 0
+    yspeed = 0
+  
+    'Wall Co-ordinates
+    
+    w(1) = 250
+    w(2) = 250
+    w(3) = 250
+    w(4) = 6240
+    w(5) = 250
+    w(6) = 250
+    w(7) = 13550
+    w(8) = 250
+    
+    'Enemy Square Position
+    
+    a = 11500
+    b = 2900
+    c = 11500
+    d = 3100
+    
+    'Enable the Timer
+    
+    timEngine.Enabled = True
+    
+    'Set Speed
+    
+    txtDSpeed.Text = 0
+    txtLSpeed.Text = 0
+    txtRSpeed.Text = 0
+    txtUSpeed.Text = 0
+    
+End Sub
+Private Sub Form_Paint()
+
+    'Draws the User's Square for use in the Engine
+    
+    Line (X, Y)-(X + 300, Y + 300), RGB(0, 0, 150), BF
+    
+    'Draws the Enemy Square for use in the Engine
+    
+    Line (a, b)-(a + 300, b + 300), RGB(255, 0, 0), BF
+    Line (c, d)-(c + 300, d + 300), RGB(255, 0, 0), BF
+    
+    'Draws the Walls for use in the Engine
+    
+    Line (w(1), w(2))-(w(1) + 13320, w(2) + 15), RGB(0, 255, 0), BF
+    Line (w(3), w(4))-(w(3) + 13320, w(4) + 15), RGB(0, 255, 0), BF
+    Line (w(5), w(6))-(w(5) + 15, w(6) + 5990), RGB(0, 255, 0), BF
+    Line (w(7), w(8))-(w(7) + 15, w(8) + 5990), RGB(0, 255, 0), BF
+    
+End Sub
+
+Private Sub timEngine_Timer()
+'Error Handler!
+    
+    On Error GoTo errhandle
+    
+    'Setting the User's Square Able to move!
+    
+    X = X + xspeed
+    Y = Y + yspeed
+    
+    'Setting the Enemy's Square to move!
+    
+    a = a + aspeed
+    b = b + bspeed
+    c = c + cspeed
+    d = d + dspeed
+    
+    'The Full Collison System!
+    
+     If Abs(w(1) - X) < 13335 And Abs(w(2) - Y) < 50 Then
+    
+        yspeed = yspeed * -1
+        txtUSpeed.Text = txtUSpeed.Text * -1
+        txtDSpeed.Text = txtDSpeed.Text * -1
+    
+    End If
+    
+    If Abs(w(1) - a) < 13335 And Abs(w(2) - b) < 50 Then
+    
+        bspeed = (bspeed * -1)
+        lblScore.Caption = lblScore.Caption + 2
+        
+    End If
+    
+    If Abs(w(3) - X) < 13335 And Abs(w(4) - Y) < 270 Then
+    
+        yspeed = yspeed * -1
+        txtUSpeed.Text = txtUSpeed.Text * -1
+        txtDSpeed.Text = txtDSpeed.Text * -1
+        
+    End If
+    
+    If Abs(w(3) - a) < 13335 And Abs(w(4) - b) < 270 Then
+    
+        bspeed = (bspeed * -1)
+        lblScore.Caption = lblScore.Caption + 2
+        
+    End If
+    
+    If Abs(w(5) - X) < 60 And Abs(w(6) - Y) < 5990 Then
+    
+        xspeed = xspeed * -1
+        txtLSpeed.Text = txtLSpeed.Text * -1
+        txtRSpeed.Text = txtRSpeed.Text * -1
+    End If
+    
+    If Abs(w(5) - a) < 60 And Abs(w(6) - b) < 5990 Then
+    
+        aspeed = (aspeed * -1)
+        lblScore.Caption = lblScore.Caption + 2
+        
+    End If
+    
+        If Abs(w(7) - X) < 270 And Abs(w(8) - Y) < 5990 Then
+    
+        xspeed = xspeed * -1
+        txtLSpeed.Text = txtLSpeed.Text * -1
+        txtRSpeed.Text = txtRSpeed.Text * -1
+    
+    End If
+    
+    If Abs(w(7) - a) < 270 And Abs(w(8) - b) < 5990 Then
+    
+        aspeed = (aspeed * -1)
+        lblScore.Caption = lblScore.Caption + 2
+                
+    End If
+    
+        
+    If Abs(w(1) - c) < 13335 And Abs(w(2) - d) < 50 Then
+    
+        dspeed = (dspeed * -1)
+        lblScore.Caption = lblScore.Caption + 2
+        
+    End If
+
+    If Abs(w(3) - c) < 13335 And Abs(w(4) - d) < 270 Then
+    
+        dspeed = (dspeed * -1)
+        lblScore.Caption = lblScore.Caption + 2
+        
+    End If
+    
+    If Abs(w(5) - c) < 60 And Abs(w(6) - d) < 5990 Then
+    
+        cspeed = (cspeed * -1)
+        lblScore.Caption = lblScore.Caption + 2
+        
+    End If
+    
+    If Abs(w(7) - c) < 270 And Abs(w(8) - d) < 5990 Then
+    
+        cspeed = (cspeed * -1)
+        lblScore.Caption = lblScore.Caption + 2
+                
+    End If
+    
+    'Score
+    
+    If lblScore.Caption >= 200 Then
+    
+        MsgBox ("Congratulations! You have Won! The Program will now close!")
+        End
+                
+    End If
+    
+        'Speed Limits!
+    
+    If txtUSpeed.Text > 150 Or txtDSpeed.Text > 150 Or txtLSpeed.Text > 150 Or txtRSpeed.Text > 150 Then
+    
+        MsgBox ("Your Engine Burnt out! Resetting Arena...")
+        X = 2500
+        Y = 2900
+
+        xspeed = 0
+        yspeed = 0
+        
+        a = 11500
+        b = 2900
+        c = 11500
+        d = 3100
+        
+        txtDSpeed.Text = 0
+        txtLSpeed.Text = 0
+        txtRSpeed.Text = 0
+        txtUSpeed.Text = 0
+        
+        lblScore.Caption = 0
+        
+    End If
+    
+
+    
+    If Abs(a - X) < 300 And Abs(b - Y) < 300 Then
+    
+       MsgBox ("You Died! Resetting Arena...")
+        X = 2500
+        Y = 2900
+
+        xspeed = 0
+        yspeed = 0
+        
+        a = 11500
+        b = 2900
+        c = 11500
+        d = 3100
+            
+        txtDSpeed.Text = 0
+        txtLSpeed.Text = 0
+        txtRSpeed.Text = 0
+        txtUSpeed.Text = 0
+        
+        lblScore.Caption = 0
+                
+    End If
+
+If Abs(c - X) < 300 And Abs(d - Y) < 300 Then
+    
+        MsgBox ("You Died! Resetting Arena...")
+        X = 2500
+        Y = 2900
+
+        xspeed = 0
+        yspeed = 0
+        
+        a = 11500
+        b = 2900
+        c = 11500
+        d = 3100
+            
+        txtDSpeed.Text = 0
+        txtLSpeed.Text = 0
+        txtRSpeed.Text = 0
+        txtUSpeed.Text = 0
+        
+        lblScore.Caption = 0
+                
+    End If
+    
+    Me.Refresh
+    
+Exit Sub
+
+errhandle:
+
+'Resets the Square and Square Speed (User)
+
+    MsgBox ("Resetting Your Square!")
+    
+    X = 2500
+    Y = 2900
+    
+    xspeed = 0
+    yspeed = 0
+    
+    txtDSpeed.Text = 0
+    txtLSpeed.Text = 0
+    txtRSpeed.Text = 0
+    txtUSpeed.Text = 0
+
+End Sub
+---------------------------------------------------------------------------------------------------------------
+VERSION 5.00
+Begin VB.Form frmHardGame 
+   BackColor       =   &H00000000&
+   BorderStyle     =   1  'Fixed Single
+   Caption         =   "The Game - Hard!"
+   ClientHeight    =   7920
+   ClientLeft      =   45
+   ClientTop       =   375
+   ClientWidth     =   13845
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   7920
+   ScaleMode       =   0  'User
+   ScaleWidth      =   13845
+   StartUpPosition =   3  'Windows Default
+   Begin VB.Timer timEngine 
+      Interval        =   1
+      Left            =   120
+      Top             =   240
+   End
+   Begin VB.TextBox txtUSpeed 
+      Enabled         =   0   'False
+      Height          =   495
+      Left            =   11520
+      TabIndex        =   3
+      Top             =   6600
+      Width           =   975
+   End
+   Begin VB.TextBox txtDSpeed 
+      Enabled         =   0   'False
+      Height          =   495
+      Left            =   11520
+      TabIndex        =   2
+      Top             =   7200
+      Width           =   975
+   End
+   Begin VB.TextBox txtLSpeed 
+      Enabled         =   0   'False
+      Height          =   495
+      Left            =   10440
+      TabIndex        =   1
+      Top             =   7200
+      Width           =   975
+   End
+   Begin VB.TextBox txtRSpeed 
+      Enabled         =   0   'False
+      Height          =   495
+      Left            =   12600
+      TabIndex        =   0
+      Top             =   7200
+      Width           =   975
+   End
+   Begin VB.Label lblYourScore 
+      BackColor       =   &H00000000&
+      Caption         =   "Your Score:"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H000000FF&
+      Height          =   375
+      Left            =   240
+      TabIndex        =   5
+      Top             =   6960
+      Width           =   1455
+   End
+   Begin VB.Label lblScore 
+      BackColor       =   &H00000000&
+      Caption         =   "0"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H000000FF&
+      Height          =   375
+      Left            =   1800
+      TabIndex        =   4
+      Top             =   6960
+      Width           =   1215
+   End
+End
+Attribute VB_Name = "frmHardGame"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+'Declarations!
+
+Option Explicit 'Define Every Variable
+
+Dim X As Integer 'User's Square X co-ordinates
+Dim Y As Integer 'User's Square Y co-ordinates
+
+Dim a As Integer 'Enemy's Square X co-ordinates
+Dim b As Integer 'Enemy's Square Y co-ordinates
+Dim c As Integer 'Enemy's Square X co-ordinates
+Dim d As Integer 'Enemy's Square Y co-ordinates
+Dim e As Integer 'Enemy's Square X co-ordinates
+Dim f As Integer 'Enemy's Square Y co-ordinates
+
+Dim w(1 To 8) As Integer 'The Walls that enclose the Squares (Array!)
+
+Dim xspeed As Integer 'User's Square X Speed
+Dim yspeed As Integer 'User's Square Y Speed
+Dim aspeed As Integer 'Enemy's Square X Speed
+Dim bspeed As Integer 'Enemy's Square Y Speed
+Dim cspeed As Integer 'Enemy's Square X Speed
+Dim dspeed As Integer 'Enemy's Square Y Speed
+Dim espeed As Integer 'Enemy's Square X Speed
+Dim fspeed As Integer 'Enemy's Square Y Speed
+
+Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+'This is the Code to Set the Speed of the User's Square...
+'The Variables are then applied to the Coo-ordinates of the Square
+
+    If KeyCode = KeyCodeConstants.vbKeyRight Or KeyCode = KeyCodeConstants.vbKeyD Then
+    
+        xspeed = xspeed + 10
+        txtRSpeed.Text = txtRSpeed.Text + 10
+        txtLSpeed.Text = txtLSpeed.Text - 10
+        
+    ElseIf KeyCode = KeyCodeConstants.vbKeyLeft Or KeyCode = KeyCodeConstants.vbKeyA Then
+    
+        xspeed = xspeed - 10
+        txtLSpeed.Text = txtLSpeed.Text + 10
+        txtRSpeed.Text = txtRSpeed.Text - 10
+
+    ElseIf KeyCode = KeyCodeConstants.vbKeyUp Or KeyCode = KeyCodeConstants.vbKeyW Then
+    
+        yspeed = yspeed - 10
+        txtUSpeed.Text = txtUSpeed.Text + 10
+        txtDSpeed.Text = txtDSpeed.Text - 10
+        
+    ElseIf KeyCode = KeyCodeConstants.vbKeyDown Or KeyCode = KeyCodeConstants.vbKeyS Then
+    
+        yspeed = yspeed + 10
+        txtDSpeed.Text = txtDSpeed.Text + 10
+        txtUSpeed.Text = txtUSpeed.Text - 10
+       
+    End If
+        
+End Sub
+
+Private Sub Form_Load()
+'The Form Start Code
+
+    'Define Enemy Square Speed
+    
+    aspeed = CInt(Int((-50 - -75 + 1) * Rnd() + -75))
+    bspeed = CInt(Int((-50 - -75 + 1) * Rnd() + -75))
+    cspeed = CInt(Int((75 - 50 + 1) * Rnd() + 50))
+    dspeed = CInt(Int((75 - 50 + 1) * Rnd() + 50))
+    espeed = CInt(Int((-75 - -80 + 1) * Rnd() + -80))
+    fspeed = CInt(Int((-75 - -80 + 1) * Rnd() + -80))
+    
+    'Define Position of User's Square
+    
+    X = 2500
+    Y = 2900
+    
+    'Safety Precautions
+    
+    xspeed = 0
+    yspeed = 0
+  
+    'Wall Co-ordinates
+    
+    w(1) = 250
+    w(2) = 250
+    w(3) = 250
+    w(4) = 6240
+    w(5) = 250
+    w(6) = 250
+    w(7) = 13550
+    w(8) = 250
+    
+    'Enemy Square Position
+    
+    a = 11500
+    b = 3000
+    c = 11500
+    d = 4000
+    e = 11500
+    f = 2000
+    
+    'Enable the Timer
+    
+    timEngine.Enabled = True
+    
+    'Set Speed
+    
+    txtDSpeed.Text = 0
+    txtLSpeed.Text = 0
+    txtRSpeed.Text = 0
+    txtUSpeed.Text = 0
+    
+End Sub
+Private Sub Form_Paint()
+
+    'Draws the User's Square for use in the Engine
+    
+    Line (X, Y)-(X + 300, Y + 300), RGB(0, 0, 150), BF
+    
+    'Draws the Enemy Square for use in the Engine
+    
+    Line (a, b)-(a + 300, b + 300), RGB(255, 0, 0), BF
+    Line (c, d)-(c + 300, d + 300), RGB(255, 0, 0), BF
+    Line (e, f)-(e + 300, f + 300), RGB(255, 0, 0), BF
+    
+    'Draws the Walls for use in the Engine
+    
+    Line (w(1), w(2))-(w(1) + 13320, w(2) + 15), RGB(0, 255, 0), BF
+    Line (w(3), w(4))-(w(3) + 13320, w(4) + 15), RGB(0, 255, 0), BF
+    Line (w(5), w(6))-(w(5) + 15, w(6) + 5990), RGB(0, 255, 0), BF
+    Line (w(7), w(8))-(w(7) + 15, w(8) + 5990), RGB(0, 255, 0), BF
+    
+End Sub
+
+Private Sub timEngine_Timer()
+'Error Handler!
+    
+    On Error GoTo errhandle
+    
+    'Setting the User's Square Able to move!
+    
+    X = X + xspeed
+    Y = Y + yspeed
+    
+    'Setting the Enemy's Square to move!
+    
+    a = a + aspeed
+    b = b + bspeed
+    c = c + cspeed
+    d = d + dspeed
+    e = e + espeed
+    f = f + fspeed
+    
+    'The Full Collison System!
+    
+     If Abs(w(1) - X) < 13335 And Abs(w(2) - Y) < 50 Then
+    
+        yspeed = yspeed * -1
+        txtUSpeed.Text = txtUSpeed.Text * -1
+        txtDSpeed.Text = txtDSpeed.Text * -1
+    
+    End If
+    
+    If Abs(w(1) - a) < 13335 And Abs(w(2) - b) < 50 Then
+    
+        bspeed = (bspeed * -1)
+        lblScore.Caption = lblScore.Caption + 2
+        
+    End If
+    
+    If Abs(w(3) - X) < 13335 And Abs(w(4) - Y) < 270 Then
+    
+        yspeed = yspeed * -1
+        txtUSpeed.Text = txtUSpeed.Text * -1
+        txtDSpeed.Text = txtDSpeed.Text * -1
+        
+    End If
+    
+    If Abs(w(3) - a) < 13335 And Abs(w(4) - b) < 270 Then
+    
+        bspeed = (bspeed * -1)
+        lblScore.Caption = lblScore.Caption + 2
+        
+    End If
+    
+    If Abs(w(5) - X) < 60 And Abs(w(6) - Y) < 5990 Then
+    
+        xspeed = xspeed * -1
+        txtLSpeed.Text = txtLSpeed.Text * -1
+        txtRSpeed.Text = txtRSpeed.Text * -1
+    End If
+    
+    If Abs(w(5) - a) < 60 And Abs(w(6) - b) < 5990 Then
+    
+        aspeed = (aspeed * -1)
+        lblScore.Caption = lblScore.Caption + 2
+        
+    End If
+    
+        If Abs(w(7) - X) < 270 And Abs(w(8) - Y) < 5990 Then
+    
+        xspeed = xspeed * -1
+        txtLSpeed.Text = txtLSpeed.Text * -1
+        txtRSpeed.Text = txtRSpeed.Text * -1
+    
+    End If
+    
+    If Abs(w(7) - a) < 270 And Abs(w(8) - b) < 5990 Then
+    
+        aspeed = (aspeed * -1)
+        lblScore.Caption = lblScore.Caption + 2
+                
+    End If
+    
+        
+    If Abs(w(1) - c) < 13335 And Abs(w(2) - d) < 50 Then
+    
+        dspeed = (dspeed * -1)
+        lblScore.Caption = lblScore.Caption + 2
+        
+    End If
+
+    If Abs(w(3) - c) < 13335 And Abs(w(4) - d) < 270 Then
+    
+        dspeed = (dspeed * -1)
+        lblScore.Caption = lblScore.Caption + 2
+        
+    End If
+    
+    If Abs(w(5) - c) < 60 And Abs(w(6) - d) < 5990 Then
+    
+        cspeed = (cspeed * -1)
+        lblScore.Caption = lblScore.Caption + 2
+        
+    End If
+    
+    If Abs(w(7) - c) < 270 And Abs(w(8) - d) < 5990 Then
+    
+        cspeed = (cspeed * -1)
+        lblScore.Caption = lblScore.Caption + 2
+                
+    End If
+    
+        
+    If Abs(w(1) - e) < 13335 And Abs(w(2) - f) < 50 Then
+    
+        fspeed = (fspeed * -1)
+        lblScore.Caption = lblScore.Caption + 4
+        
+    End If
+
+    If Abs(w(3) - e) < 13335 And Abs(w(4) - f) < 270 Then
+    
+        fspeed = (fspeed * -1)
+        lblScore.Caption = lblScore.Caption + 4
+        
+    End If
+    
+    If Abs(w(5) - e) < 60 And Abs(w(6) - f) < 5990 Then
+    
+        espeed = (espeed * -1)
+        lblScore.Caption = lblScore.Caption + 4
+        
+    End If
+    
+    If Abs(w(7) - e) < 270 And Abs(w(8) - f) < 5990 Then
+    
+        espeed = (espeed * -1)
+        lblScore.Caption = lblScore.Caption + 4
+                
+    End If
+    
+    'Score
+    
+    If lblScore.Caption >= 500 Then
+    
+        MsgBox ("Congratulations! You have Won! The Program will now close!")
+        End
+                
+    End If
+    
+        'Speed Limits!
+    
+    If txtUSpeed.Text > 150 Or txtDSpeed.Text > 150 Or txtLSpeed.Text > 150 Or txtRSpeed.Text > 150 Then
+    
+        MsgBox ("Your Engine Burnt out! Resetting Arena...")
+        X = 2500
+        Y = 2900
+
+        xspeed = 0
+        yspeed = 0
+        
+        a = 11500
+        b = 3000
+        c = 11500
+        d = 4000
+        e = 11500
+        f = 2000
+    
+        txtDSpeed.Text = 0
+        txtLSpeed.Text = 0
+        txtRSpeed.Text = 0
+        txtUSpeed.Text = 0
+        
+        lblScore.Caption = 0
+        
+    End If
+    
+
+    
+    If Abs(a - X) < 300 And Abs(b - Y) < 300 Then
+    
+       MsgBox ("You Died! Resetting Arena...")
+        X = 2500
+        Y = 2900
+
+        xspeed = 0
+        yspeed = 0
+        
+        a = 11500
+        b = 2900
+        c = 11500
+        d = 3100
+        e = 11500
+        f = 2000
+        txtDSpeed.Text = 0
+        txtLSpeed.Text = 0
+        txtRSpeed.Text = 0
+        txtUSpeed.Text = 0
+        
+        lblScore.Caption = 0
+                
+    End If
+
+If Abs(c - X) < 300 And Abs(d - Y) < 300 Then
+    
+        MsgBox ("You Died! Resetting Arena...")
+        X = 2500
+        Y = 2900
+
+        xspeed = 0
+        yspeed = 0
+        
+        a = 11500
+        b = 2900
+        c = 11500
+        d = 3100
+        e = 11500
+        f = 2000
+        txtDSpeed.Text = 0
+        txtLSpeed.Text = 0
+        txtRSpeed.Text = 0
+        txtUSpeed.Text = 0
+        
+        lblScore.Caption = 0
+                
+    End If
+    If Abs(e - X) < 300 And Abs(f - Y) < 300 Then
+    
+        MsgBox ("You Died! Resetting Arena...")
+        X = 2500
+        Y = 2900
+
+        xspeed = 0
+        yspeed = 0
+        
+        a = 11500
+        b = 2900
+        c = 11500
+        d = 3100
+        e = 11500
+        f = 2000
+        txtDSpeed.Text = 0
+        txtLSpeed.Text = 0
+        txtRSpeed.Text = 0
+        txtUSpeed.Text = 0
+        
+        lblScore.Caption = 0
+                
+    End If
+    
+    Me.Refresh
+    
+Exit Sub
+
+errhandle:
+
+'Resets the Square and Square Speed (User)
+
+    MsgBox ("Resetting Your Square!")
+    
+    X = 2500
+    Y = 2900
+    
+    xspeed = 0
+    yspeed = 0
+    
+    txtDSpeed.Text = 0
+    txtLSpeed.Text = 0
+    txtRSpeed.Text = 0
+    txtUSpeed.Text = 0
+
+End Sub
+
+
