@@ -301,6 +301,14 @@ Begin VB.Form frmHardGame
       Left            =   120
       Top             =   240
    End
+   Begin VB.Label Label9 
+      Caption         =   "Label9"
+      Height          =   372
+      Left            =   840
+      TabIndex        =   20
+      Top             =   360
+      Width           =   372
+   End
    Begin VB.Label Label5 
       BackColor       =   &H00000000&
       Height          =   132
@@ -362,6 +370,9 @@ Dim P2 As Integer
 
 Dim PTimer As Integer
 Dim npress As Boolean
+
+Dim currentSpeed As Double
+Dim newspeed As Double
 
 Dim a As Integer 'Enemy's Square X co-ordinates
 Dim b As Integer 'Enemy's Square Y co-ordinates
@@ -445,8 +456,6 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 
     If KeyCode = KeyCodeConstants.vbKeyN Then
     
-        
-        
         If prbShield.Value > 0 Then
         
             npress = False
@@ -557,7 +566,7 @@ End Sub
 
 Private Sub timEngine_Timer()
 'Error Handler!
-
+    Label9.Caption = PTimer
     On Error GoTo errhandle
     
     'SHIELD
@@ -638,7 +647,134 @@ Private Sub timEngine_Timer()
             Label4.Visible = False
             lblScore = lblScore + 50
             
+       ElseIf PTimer = 1 Then
+       
+            If X < a And Y > b Then '1st QUADRANT
+                'CSPEED, NSPEED = DOUBLE
+                currentSpeed = Sqr((aspeed ^ 2) + (bspeed ^ 2))
+                newspeed = Sqr((Abs(a - X) ^ 2) + (Abs(Y - b) ^ 2))
+            
+                aspeed = -currentSpeed * (Abs(a - X) / newspeed)
+                bspeed = currentSpeed * (Abs(Y - b) / newspeed)
+        
+            End If
+        
+            If X < a And Y < b Then ' 2nd QUADRANT
+                'CSPEED, NSPEED = DOUBLE
+                currentSpeed = Sqr((aspeed ^ 2) + (bspeed ^ 2))
+                newspeed = Sqr((Abs(a - X) ^ 2) + (Abs(b - Y) ^ 2))
+
+                aspeed = -currentSpeed * (Abs(a - X) / newspeed)
+                bspeed = -currentSpeed * (Abs(Y - b) / newspeed)
+
+            End If
+
+            If X > a And Y < b Then '3rd QUADRANT
+                'CSPEED, NSPEED = DOUBLE
+                currentSpeed = Sqr((aspeed ^ 2) + (bspeed ^ 2))
+                newspeed = Sqr((Abs(X - a) ^ 2) + (Abs(b - Y) ^ 2))
+
+                aspeed = currentSpeed * (Abs(a - X) / newspeed)
+                bspeed = -currentSpeed * (Abs(Y - b) / newspeed)
+
+            End If
+        
+            If X > a And Y > b Then '4th QUADRANT
+                'CSPEED, NSPEED = DOUBLE
+                currentSpeed = Sqr((aspeed ^ 2) + (bspeed ^ 2))
+                newspeed = Sqr((Abs(X - a) ^ 2) + (Abs(Y - b) ^ 2))
+            
+                aspeed = currentSpeed * (Abs(a - X) / newspeed)
+                bspeed = currentSpeed * (Abs(Y - b) / newspeed)
+        
+            End If
+            
+            If X < c And Y > d Then '1st QUADRANT
+                'CSPEED, NSPEED = DOUBLE
+                currentSpeed = Sqr((cspeed ^ 2) + (dspeed ^ 2))
+                newspeed = Sqr((Abs(c - X) ^ 2) + (Abs(Y - d) ^ 2))
+            
+                cspeed = -currentSpeed * (Abs(c - X) / newspeed)
+                dspeed = currentSpeed * (Abs(Y - d) / newspeed)
+        
+            End If
+        
+            If X < c And Y < d Then ' 2nd QUADRANT
+                'CSPEED, NSPEED = DOUBLE
+                currentSpeed = Sqr((cspeed ^ 2) + (dspeed ^ 2))
+                newspeed = Sqr((Abs(c - X) ^ 2) + (Abs(d - Y) ^ 2))
+
+                cspeed = -currentSpeed * (Abs(c - X) / newspeed)
+                dspeed = -currentSpeed * (Abs(Y - d) / newspeed)
+
+            End If
+
+            If X > c And Y < d Then '3rd QUADRANT
+                'CSPEED, NSPEED = DOUBLE
+                currentSpeed = Sqr((cspeed ^ 2) + (dspeed ^ 2))
+                newspeed = Sqr((Abs(X - c) ^ 2) + (Abs(d - Y) ^ 2))
+
+                cspeed = currentSpeed * (Abs(c - X) / newspeed)
+                dspeed = -currentSpeed * (Abs(Y - d) / newspeed)
+
+            End If
+        
+            If X > c And Y > d Then '4th QUADRANT
+                'CSPEED, NSPEED = DOUBLE
+                currentSpeed = Sqr((cspeed ^ 2) + (dspeed ^ 2))
+                newspeed = Sqr((Abs(X - c) ^ 2) + (Abs(Y - d) ^ 2))
+            
+                cspeed = currentSpeed * (Abs(c - X) / newspeed)
+                dspeed = currentSpeed * (Abs(Y - d) / newspeed)
+        
+            End If
+            
+            If X < e And Y > f Then '1st QUADRANT
+                'CSPEED, NSPEED = DOUBLE
+                currentSpeed = Sqr((espeed ^ 2) + (fspeed ^ 2))
+                newspeed = Sqr((Abs(f - X) ^ 2) + (Abs(Y - e) ^ 2))
+            
+                espeed = -currentSpeed * (Abs(e - X) / newspeed)
+                fspeed = currentSpeed * (Abs(Y - f) / newspeed)
+        
+            End If
+        
+            If X < a And Y < b Then ' 2nd QUADRANT
+                'CSPEED, NSPEED = DOUBLE
+                currentSpeed = Sqr((espeed ^ 2) + (fspeed ^ 2))
+                newspeed = Sqr((Abs(e - X) ^ 2) + (Abs(f - Y) ^ 2))
+
+                espeed = -currentSpeed * (Abs(e - X) / newspeed)
+                fspeed = -currentSpeed * (Abs(Y - f) / newspeed)
+
+            End If
+
+            If X > e And Y < f Then '3rd QUADRANT
+                'CSPEED, NSPEED = DOUBLE
+                currentSpeed = Sqr((espeed ^ 2) + (fspeed ^ 2))
+                newspeed = Sqr((Abs(X - e) ^ 2) + (Abs(f - Y) ^ 2))
+
+                espeed = currentSpeed * (Abs(e - X) / newspeed)
+                fspeed = -currentSpeed * (Abs(Y - f) / newspeed)
+
+            End If
+        
+            If X > e And Y > f Then '4th QUADRANT
+                'CSPEED, NSPEED = DOUBLE
+                currentSpeed = Sqr((espeed ^ 2) + (fspeed ^ 2))
+                newspeed = Sqr((Abs(X - e) ^ 2) + (Abs(Y - f) ^ 2))
+            
+                espeed = currentSpeed * (Abs(e - X) / newspeed)
+                fspeed = currentSpeed * (Abs(Y - f) / newspeed)
+        
+            End If
+        
+            PTimer = 5
+            Label4.Visible = False
+       
        End If
+       
+       
                 
     End If
    
@@ -1097,12 +1233,17 @@ Private Sub Timer1_Timer()
 
     PTimer = CInt(Int(6 * Rnd()) + 1)
     
-    If PTimer = 3 Then
+'    If PTimer = 3 Then
+'
+'        Label4.Visible = True
+'        Timer1.Interval = 5000
+'
+'    ElseIf PTimer = 6 Then
+'
+'        Label4.Visible = True
+'        Timer1.Interval = 5000
         
-        Label4.Visible = True
-        Timer1.Interval = 5000
-        
-    ElseIf PTimer = 6 Then
+     If PTimer = 1 Then
         
         Label4.Visible = True
         Timer1.Interval = 5000

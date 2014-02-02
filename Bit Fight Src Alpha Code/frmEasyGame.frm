@@ -4,14 +4,14 @@ Begin VB.Form frmEasyGame
    BorderStyle     =   1  'Fixed Single
    Caption         =   "The Game - Easy!"
    ClientHeight    =   7920
-   ClientLeft      =   45
-   ClientTop       =   375
-   ClientWidth     =   13845
+   ClientLeft      =   48
+   ClientTop       =   372
+   ClientWidth     =   13848
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   7920
-   ScaleWidth      =   13845
+   ScaleWidth      =   13848
    StartUpPosition =   3  'Windows Default
    Begin VB.TextBox txtRSpeed 
       Enabled         =   0   'False
@@ -49,6 +49,14 @@ Begin VB.Form frmEasyGame
       Interval        =   1
       Left            =   120
       Top             =   240
+   End
+   Begin VB.Label Label1 
+      Caption         =   "Label1"
+      Height          =   252
+      Left            =   4560
+      TabIndex        =   6
+      Top             =   2640
+      Width           =   492
    End
    Begin VB.Label lblScore 
       BackColor       =   &H00000000&
@@ -96,6 +104,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 'Declarations!
 
+
 Option Explicit 'Define Every Variable
 
 Dim X As Integer 'User's Square X co-ordinates
@@ -105,6 +114,10 @@ Dim a As Integer 'Enemy's Square X co-ordinates
 Dim b As Integer 'Enemy's Square Y co-ordinates
 
 Dim w(1 To 8) As Integer 'The Walls that enclose the Squares (Array!)
+
+Dim TEST As Boolean
+Dim currentSpeed As Double
+Dim newspeed As Double
 
 Dim xspeed As Integer 'User's Square X Speed
 Dim yspeed As Integer 'User's Square Y Speed
@@ -138,6 +151,18 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
         yspeed = yspeed + 10
         txtDSpeed.Text = txtDSpeed.Text + 10
         txtUSpeed.Text = txtUSpeed.Text - 10
+        
+    ElseIf KeyCode = KeyCodeConstants.vbKeyN Then
+    
+        If TEST = False Then
+        
+            TEST = True
+            
+        Else
+        
+            TEST = False
+            
+        End If
        
     End If
         
@@ -153,8 +178,8 @@ Private Sub Form_Load()
     
     'Define Position of User's Square
     
-    X = 2500
-    Y = 2900
+    X = 4500
+    Y = 4900
     
     'Safety Precautions
     
@@ -212,7 +237,7 @@ Private Sub timEngine_Timer()
 'Error Handler!
     
     On Error GoTo errhandle
-    
+    Label1.Caption = TEST
     'Setting the User's Square Able to move!
     
     X = X + xspeed
@@ -334,6 +359,53 @@ Private Sub timEngine_Timer()
         
         lblScore.Caption = 0
                 
+    End If
+    
+    'THE POWER OF MATHS
+    If TEST = True Then
+    
+        If X < a And Y > b Then '1st QUADRANT
+            'CSPEED, NSPEED = DOUBLE
+            currentSpeed = Sqr((aspeed ^ 2) + (bspeed ^ 2))
+            newspeed = Sqr((Abs(a - X) ^ 2) + (Abs(Y - b) ^ 2))
+            
+            aspeed = -currentSpeed * (Abs(a - X) / newspeed)
+            bspeed = currentSpeed * (Abs(Y - b) / newspeed)
+        
+        End If
+        
+        If X < a And Y < b Then ' 2nd QUADRANT
+            'CSPEED, NSPEED = DOUBLE
+            currentSpeed = Sqr((aspeed ^ 2) + (bspeed ^ 2))
+            newspeed = Sqr((Abs(a - X) ^ 2) + (Abs(b - Y) ^ 2))
+
+            aspeed = -currentSpeed * (Abs(a - X) / newspeed)
+            bspeed = -currentSpeed * (Abs(Y - b) / newspeed)
+
+        End If
+
+        If X > a And Y < b Then '3rd QUADRANT
+            'CSPEED, NSPEED = DOUBLE
+            currentSpeed = Sqr((aspeed ^ 2) + (bspeed ^ 2))
+            newspeed = Sqr((Abs(X - a) ^ 2) + (Abs(b - Y) ^ 2))
+
+            aspeed = currentSpeed * (Abs(a - X) / newspeed)
+            bspeed = -currentSpeed * (Abs(Y - b) / newspeed)
+
+        End If
+        
+        If X > a And Y > b Then '4th QUADRANT
+            'CSPEED, NSPEED = DOUBLE
+            currentSpeed = Sqr((aspeed ^ 2) + (bspeed ^ 2))
+            newspeed = Sqr((Abs(X - a) ^ 2) + (Abs(Y - b) ^ 2))
+            
+            aspeed = currentSpeed * (Abs(a - X) / newspeed)
+            bspeed = currentSpeed * (Abs(Y - b) / newspeed)
+        
+        End If
+        
+
+        
     End If
     
     Me.Refresh

@@ -9,6 +9,12 @@ Begin VB.Form Form1
    ScaleHeight     =   6024
    ScaleWidth      =   12780
    StartUpPosition =   3  'Windows Default
+   Begin VB.Timer Timer4 
+      Enabled         =   0   'False
+      Interval        =   50
+      Left            =   3120
+      Top             =   240
+   End
    Begin VB.Timer Timer3 
       Interval        =   1
       Left            =   1920
@@ -24,6 +30,16 @@ Begin VB.Form Form1
       Interval        =   1
       Left            =   120
       Top             =   0
+   End
+   Begin VB.Label Label4 
+      BackColor       =   &H0000FFFF&
+      Caption         =   "Label4"
+      ForeColor       =   &H0000FFFF&
+      Height          =   372
+      Left            =   3480
+      TabIndex        =   3
+      Top             =   2280
+      Width           =   372
    End
    Begin VB.Line Line1 
       X1              =   11400
@@ -85,6 +101,8 @@ Public Enemy2BitXSpeed As Integer 'Speed X of User Bit
 Public Enemy2BitYSpeed As Integer 'Speed Y of User Bit
 
 Public SlowMo As Boolean
+Public Hit As Integer
+Public interval As Integer
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 
@@ -119,6 +137,21 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
             SlowMo = True
             
         End If
+        
+    ElseIf KeyCode = KeyCodeConstants.vbKeyH Then
+    
+        If Timer4.Enabled = False Then
+        
+            Timer4.Enabled = True
+            Hit = 255
+            
+        Else
+            
+            Hit = 255
+            Timer4.Enabled = False
+            
+            
+        End If
     
     End If
 
@@ -126,6 +159,8 @@ End Sub
 
 Private Sub Form_Load()
 
+    Hit = 255
+    interval = 1
     UserBitX = 1000
     UserBitY = 3000
     
@@ -150,18 +185,20 @@ Private Sub Timer1_Timer()
     Label1.Top = UserBitY
     Label1.Left = UserBitX
     
+    Label1.BackColor = Hit
+    
     UserBitX = UserBitX + UserBitXSpeed
     UserBitY = UserBitY + UserBitYSpeed
     
     If SlowMo = True Then
     
-        Timer1.Interval = 50
-        Timer2.Interval = 0
+        Timer1.interval = 50
+        Timer2.interval = 0
         
     Else
     
-        Timer1.Interval = 1
-        Timer2.Interval = 2
+        Timer1.interval = interval
+        Timer2.interval = 2
         
     End If
 
@@ -228,4 +265,29 @@ Private Sub Timer3_Timer()
 
     End If
     
+End Sub
+
+Private Sub Timer4_Timer()
+
+   If Hit <> 0 Then
+    
+        Hit = Hit - 1
+        
+    Else
+        
+        MsgBox "LOL"
+        End
+        
+    End If
+    
+    If Hit < 100 Then
+    
+        interval = interval + 5
+        
+    Else
+    
+        interval = 1
+    
+    End If
+
 End Sub
