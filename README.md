@@ -1,4 +1,4 @@
-BitFight_Alpha
+BitFight (Alpha Version)
 ==============
 
 BitFight is a game created by Amrit Amar for the International African Game Programming Championship 2013, and this is the first version of the game, made in 4 hours.
